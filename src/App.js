@@ -1,25 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import styled from "@emotion/styled/macro";
+import SignupForm from "./components/SignupForm";
+
+const StHeader = styled.header`
+  height: 48px;
+  padding: 0 25px;
+  box-shadow: 0 0 10px hsla(0, 0%, 60%, 0.5);
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  background: white;
+`;
+
+const StLogo = styled.img`
+  margin-top: 10px;
+`;
+
+const StPlaceholderImg = styled.img`
+  float: left;
+  width: 50%;
+`;
+
+const StMain = styled.main`
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 100px 0;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <StHeader>
+        <StLogo src="logo.svg" height="28px" alt="ollie logo" />
+      </StHeader>
+      <StMain>
+        <StPlaceholderImg
+          src="https://via.placeholder.com/600"
+          alt="signup placeholder"
+        />
+        <SignupForm />
+      </StMain>
+    </>
   );
 }
 
