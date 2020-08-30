@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled/macro";
 import { css } from "@emotion/core";
 import { useForm } from "react-hook-form";
+import StButton from "./StButton";
 import { colors } from "../util/globalStyles";
 
 const StForm = styled.form`
@@ -61,32 +62,30 @@ const StRequirementsText = styled.p`
   font-style: italic;
 `;
 
-const StButton = styled.button`
-  background: ${colors.highlight};
-  color: white;
-  border: none;
-  padding: 12px 0;
-  width: 100%;
-  border-radius: 100em;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background 0.2s ease-in-out;
-  &:hover {
-    background: ${colors.darkHighlight};
-    cursor: pointer;
-  }
-  &:focus {
-    outline: none;
-  }
-`;
-
-function Form({ config, onSubmit, onError }) {
+function Form({ config, method, action, onSuccess, onError }) {
   const { register, handleSubmit, watch, errors } = useForm({
     mode: "onBlur",
   });
 
+  const onSubmit = async (data) => {
+    const response = await fetch(action, {
+      method: method,
+      body: JSON.stringify(data),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      onSuccess(response);
+    } else {
+      onError(response);
+    }
+  };
+
   return (
-    <StForm onSubmit={handleSubmit(onSubmit, onError)}>
+    <StForm onSubmit={handleSubmit(onSubmit)}>
       {config({ register, handleSubmit, watch, errors }).map(
         ({
           key,
@@ -124,8 +123,14 @@ function Form({ config, onSubmit, onError }) {
 
 Form.propTypes = {
   config: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  onError: PropTypes.func.isRequired,
+  action: PropTypes.string.isRequired,
+  method: PropTypes.oneOf(["POST", "GET", "PUT", "PATCH", "DELETE"]).isRequired,
+  onSuccess: PropTypes.func,
+  onError: PropTypes.func,
+};
+
+Form.defaultProps = {
+  onError: () => {},
 };
 
 export default Form;

@@ -82,15 +82,23 @@ const config = ({ watch }) => [
 ];
 
 function SignupForm() {
-  function onSubmit(data, e) {
-    console.log(data);
-  }
+  const onSuccess = (response) => {
+    console.log("success!");
+  };
 
-  function onError(data, e) {
-    console.log(data);
-  }
+  const onError = (response) => {
+    console.log("failed");
+  };
 
-  return <Form config={config} onSubmit={onSubmit} onError={onError} />;
+  return (
+    <Form
+      config={config}
+      method="POST"
+      action={process.env.REACT_APP_API}
+      onSuccess={onSuccess}
+      onError={onError}
+    />
+  );
 }
 
 export default SignupForm;
