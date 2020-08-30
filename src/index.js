@@ -4,6 +4,7 @@ import { injectGlobal } from "emotion";
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import { colors } from "./util/globalStyles";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 injectGlobal`
   body {

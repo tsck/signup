@@ -22,9 +22,9 @@ const StButton = styled.button`
   }
 `;
 
-const ClickableButton = ({ type, children, clickHandler }) => {
+const ClickableButton = ({ type, children, clickHandler, disabled }) => {
   return (
-    <StButton type={type} onClick={clickHandler}>
+    <StButton type={type} onClick={clickHandler} disabled={disabled}>
       {children}
     </StButton>
   );
@@ -34,10 +34,12 @@ ClickableButton.propTypes = {
   type: PropTypes.string.isRequired,
   children: PropTypes.string.isRequired,
   clickHandler: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 ClickableButton.defaultProps = {
   clickHandler: () => {},
+  disabled: false,
 };
 
 export default ClickableButton;

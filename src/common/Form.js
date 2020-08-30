@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled/macro";
 import { css } from "@emotion/core";
 import { useForm } from "react-hook-form";
 import StButton from "./StButton";
 import { colors } from "../util/globalStyles";
+import Loader from "react-loader-spinner";
 
 const StForm = styled.form`
   display: inline-block;
@@ -63,11 +64,14 @@ const StRequirementsText = styled.p`
 `;
 
 function Form({ config, method, action, onSuccess, onError }) {
+  const [isProcessing, setIsProcessing] = useState(false);
   const { register, handleSubmit, watch, errors, reset } = useForm({
     mode: "onBlur",
   });
 
   const onSubmit = async (data) => {
+    setIsProcessing(true);
+
     const response = await fetch(action, {
       method: method,
       body: JSON.stringify(data),
@@ -76,6 +80,8 @@ function Form({ config, method, action, onSuccess, onError }) {
         "Content-Type": "application/json",
       },
     });
+
+    setIsProcessing(false);
 
     if (response.ok) {
       onSuccess(response);
@@ -117,7 +123,13 @@ function Form({ config, method, action, onSuccess, onError }) {
           </div>
         )
       )}
-      <StButton type="submit">Submit</StButton>
+      {isProcessing ? (
+        <StButton type="button" disabled={true}>
+          <Loader type="Oval" color="#ffffff" height={10} width={10} />
+        </StButton>
+      ) : (
+        <StButton type="submit">Submit</StButton>
+      )}
     </StForm>
   );
 }
