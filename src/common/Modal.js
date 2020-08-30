@@ -64,6 +64,20 @@ const StDescription = styled.p`
 `;
 
 const Modal = ({ message, buttonText, clickHandler, type }) => {
+  const keypressHandler = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      clickHandlerAdv(e);
+    }
+  };
+
+  const clickHandlerAdv = (e) => {
+    window.removeEventListener("keypress", keypressHandler);
+    clickHandler(e);
+  };
+
+  window.addEventListener("keypress", keypressHandler);
+
   return (
     <StBackground>
       <StMessageBox>
@@ -81,7 +95,7 @@ const Modal = ({ message, buttonText, clickHandler, type }) => {
           </>
         )}
         <StDescription>{message}</StDescription>
-        <ClickableButton type="button" clickHandler={clickHandler}>
+        <ClickableButton type="button" clickHandler={clickHandlerAdv}>
           {buttonText}
         </ClickableButton>
       </StMessageBox>

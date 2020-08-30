@@ -17,6 +17,7 @@ const StPlaceholderImg = styled.img`
 
 const StContent = styled.div`
   padding-top: ${dimensions.header.height * 2 + "px"};
+  padding-bottom: 100px;
 `;
 
 function App() {
