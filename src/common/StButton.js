@@ -1,3 +1,4 @@
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled/macro";
 import { colors } from "../util/globalStyles";
@@ -21,9 +22,22 @@ const StButton = styled.button`
   }
 `;
 
-StButton.propTypes = {
-  type: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired,
+const ClickableButton = ({ type, children, clickHandler }) => {
+  return (
+    <StButton type={type} onClick={clickHandler}>
+      {children}
+    </StButton>
+  );
 };
 
-export default StButton;
+ClickableButton.propTypes = {
+  type: PropTypes.string.isRequired,
+  children: PropTypes.string.isRequired,
+  clickHandler: PropTypes.func,
+};
+
+ClickableButton.defaultProps = {
+  clickHandler: () => {},
+};
+
+export default ClickableButton;

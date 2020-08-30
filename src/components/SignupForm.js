@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Form from "../common/Form";
 import { isValidPassword } from "../util/stringValidators";
+import Modal from "../common/Modal";
 
 const config = ({ watch }) => [
   {
@@ -82,22 +83,52 @@ const config = ({ watch }) => [
 ];
 
 function SignupForm() {
+  const [showingErrorModal, setShowingErrorModal] = useState(false);
+  const [showingSuccessModal, setShowingSuccessModal] = useState(false);
+
   const onSuccess = (response) => {
-    console.log("success!");
+    setShowingSuccessModal(true);
+  };
+
+  const successModalClickHandler = () => {
+    setShowingSuccessModal(false);
   };
 
   const onError = (response) => {
-    console.log("failed");
+    setShowingErrorModal(true);
   };
 
+  const errorModalClickHandler = () => {
+    setShowingErrorModal(false);
+  };
+
+  const errorMessage = "Something went wrong. Please try again.";
+  const successMessage = "Your info was successfully submitted.";
+
   return (
-    <Form
-      config={config}
-      method="POST"
-      action={process.env.REACT_APP_API}
-      onSuccess={onSuccess}
-      onError={onError}
-    />
+    <>
+      {showingErrorModal && (
+        <Modal
+          clickHandler={errorModalClickHandler}
+          message={errorMessage}
+          type="error"
+        />
+      )}
+      {showingSuccessModal && (
+        <Modal
+          clickHandler={successModalClickHandler}
+          message={successMessage}
+          type="success"
+        />
+      )}
+      <Form
+        config={config}
+        method="POST"
+        action={process.env.REACT_APP_API}
+        onSuccess={onSuccess}
+        onError={onError}
+      />
+    </>
   );
 }
 

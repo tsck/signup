@@ -63,7 +63,7 @@ const StRequirementsText = styled.p`
 `;
 
 function Form({ config, method, action, onSuccess, onError }) {
-  const { register, handleSubmit, watch, errors } = useForm({
+  const { register, handleSubmit, watch, errors, reset } = useForm({
     mode: "onBlur",
   });
 
@@ -79,6 +79,7 @@ function Form({ config, method, action, onSuccess, onError }) {
 
     if (response.ok) {
       onSuccess(response);
+      reset(response);
     } else {
       onError(response);
     }
