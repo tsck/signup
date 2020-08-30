@@ -4,21 +4,21 @@ export const colors = {
   darkHighlight: "#ef2e25",
 };
 
-export const layout = {
+export const dimensions = {
   header: {
-    height: "50px",
+    height: 48,
   },
   content: {
-    width: "1200px",
+    maxWidth: 1200,
   },
   mobile: {
     content: {
-      width: "600px",
+      maxWidth: 600,
     },
   },
 };
 
 export default {
-  layout,
+  dimensions,
   colors,
 };

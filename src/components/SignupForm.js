@@ -6,7 +6,6 @@ const config = ({ watch }) => [
   {
     key: "email",
     type: "email",
-    placeholder: "eg. homerjsimpson@email.com",
     validation: {
       required: "This field is required.",
       pattern: {
@@ -18,13 +17,12 @@ const config = ({ watch }) => [
   {
     key: "password",
     type: "password",
-    placeholder:
-      "Must be at least 8 characters - 1 number, 1 letter, 1 special",
+    requirements: "Min. 8 characters w/ a number, a letter, and a symbol",
     validation: {
       required: "This field is required.",
       validate: (value) =>
         isValidPassword(value) ||
-        "Must contain 1 number, 1 letter, and 1 special character.",
+        "Must contain a number, a letter, and a special",
       minLength: {
         value: 8,
         message: "Must be at least 8 characters.",
@@ -45,7 +43,6 @@ const config = ({ watch }) => [
   {
     key: "name",
     type: "text",
-    placeholder: "eg. Brian Griffin",
     validation: {
       required: "This field is required.",
     },
@@ -53,7 +50,7 @@ const config = ({ watch }) => [
   {
     key: "weight",
     type: "number",
-    placeholder: "Min 3 lbs - max 180 lbs",
+    requirements: "Must be between 3 and 180",
     validation: {
       required: "This field is required.",
       min: {
@@ -70,7 +67,7 @@ const config = ({ watch }) => [
     label: "ideal weight",
     key: "idealWeight",
     type: "number",
-    placeholder: "Min 3 lbs - max 180 lbs",
+    requirements: "Must be between 3 and 180",
     validation: {
       min: {
         value: 3,

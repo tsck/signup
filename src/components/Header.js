@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "@emotion/styled/macro";
+import { dimensions } from "../util/globalStyles";
 
 const StHeader = styled.header`
-  height: 48px;
+  height: ${dimensions.header.height + "px"};
   box-shadow: 0 0 10px hsla(0, 0%, 60%, 0.5);
-  text-align: center;
   position: fixed;
   width: 100%;
   background: white;
 `;
 
 const StLogo = styled.img`
-  margin-top: 10px;
+  margin: 10px 0 0 25px;
 `;
 
 function Header() {

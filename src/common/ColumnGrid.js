@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled/macro";
+import { dimensions } from "../util/globalStyles";
 
 function ColumnGrid({ children, maxNumOfCols, minNumOfCols, breakpoint }) {
   const maxNumOfColsInt = parseInt(maxNumOfCols);
@@ -19,10 +20,9 @@ function ColumnGrid({ children, maxNumOfCols, minNumOfCols, breakpoint }) {
   }
 
   const StContainer = styled.div`
-    max-width: 1200px;
+    max-width: ${dimensions.content.maxWidth + "px"};
     width: 100%;
     margin: 0 auto;
-    padding: 100px 0;
     display: grid;
     grid-template-columns: ${maxGridTemplateColumns};
     @media (max-width: ${breakpoint}px) {
