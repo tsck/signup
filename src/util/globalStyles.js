@@ -11,6 +11,11 @@ export const layout = {
   content: {
     width: "1200px",
   },
+  mobile: {
+    content: {
+      width: "600px",
+    },
+  },
 };
 
 export default {

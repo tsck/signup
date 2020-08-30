@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "./Form";
+import Form from "../common/Form";
 import { isValidPassword } from "../util/stringValidators";
 
 const config = ({ watch }) => [
