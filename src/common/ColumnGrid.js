@@ -40,7 +40,7 @@ function ColumnGrid({ children, maxNumOfCols, minNumOfCols, breakpoint }) {
 }
 
 ColumnGrid.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.node.isRequired,
   maxNumOfCols: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   minNumOfCols: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   breakpoint: PropTypes.number,

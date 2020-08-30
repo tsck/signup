@@ -32,7 +32,7 @@ const ClickableButton = ({ type, children, clickHandler, disabled }) => {
 
 ClickableButton.propTypes = {
   type: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   clickHandler: PropTypes.func,
   disabled: PropTypes.bool,
 };
