@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled/macro";
+import { css } from "@emotion/core";
 import { useForm } from "react-hook-form";
 import { colors } from "../util/globalStyles";
 
@@ -41,13 +42,23 @@ const StInput = styled.input`
   }
 `;
 
-const StErrorMessage = styled.p`
-  color: ${colors.highlight};
-  font-weight: bold;
+const subtextStyle = css`
   font-size: 0.7rem;
   margin-top: 0;
   margin-bottom: 15px;
   height: 15px;
+`;
+
+const StErrorMessage = styled.p`
+  ${subtextStyle}
+  color: ${colors.highlight};
+  font-weight: bold;
+`;
+
+const StRequirementsText = styled.p`
+  ${subtextStyle}
+  color: rgba(0, 0, 0, 0.5);
+  font-style: italic;
 `;
 
 const StButton = styled.button`
@@ -77,9 +88,19 @@ function Form({ config, onSubmit, onError }) {
   return (
     <StForm onSubmit={handleSubmit(onSubmit, onError)}>
       {config({ register, handleSubmit, watch, errors }).map(
-        ({ key, type, placeholder = " ", validation = {}, label = "" }) => (
+        ({
+          key,
+          type,
+          placeholder = " ",
+          validation = {},
+          label = "",
+          requirements = "",
+        }) => (
           <div key={key}>
-            <StLabel htmlFor={key}>{label || key}</StLabel>
+            <StLabel htmlFor={key}>
+              {label || key}
+              {!validation.required ? " (optional)" : ""}
+            </StLabel>
             <StInput
               type={type}
               name={key}
@@ -88,7 +109,11 @@ function Form({ config, onSubmit, onError }) {
               className={`${errors[key] ? "error" : ""}`}
               placeholder={placeholder}
             />
-            <StErrorMessage>{errors[key]?.message}</StErrorMessage>
+            {errors[key] ? (
+              <StErrorMessage>{errors[key]?.message}</StErrorMessage>
+            ) : (
+              <StRequirementsText>{requirements}</StRequirementsText>
+            )}
           </div>
         )
       )}
