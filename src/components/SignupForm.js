@@ -83,8 +83,11 @@ const config = ({ watch }) => [
 ];
 
 function SignupForm() {
+  const defaultErrorMessage = "Something went wrong. Please try again.";
+  const defaultSuccessMessage = "Your info was successfully submitted.";
   const [showingErrorModal, setShowingErrorModal] = useState(false);
   const [showingSuccessModal, setShowingSuccessModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(defaultErrorMessage);
 
   const onSuccess = (response) => {
     setShowingSuccessModal(true);
@@ -94,16 +97,18 @@ function SignupForm() {
     setShowingSuccessModal(false);
   };
 
-  const onError = (response) => {
+  const onError = async (response) => {
+    if (response.status === 400) {
+      const body = await response.json();
+      setErrorMessage(body.message);
+    }
     setShowingErrorModal(true);
   };
 
   const errorModalClickHandler = () => {
     setShowingErrorModal(false);
+    setErrorMessage(defaultErrorMessage);
   };
-
-  const errorMessage = "Something went wrong. Please try again.";
-  const successMessage = "Your info was successfully submitted.";
 
   return (
     <>
@@ -117,7 +122,7 @@ function SignupForm() {
       {showingSuccessModal && (
         <Modal
           clickHandler={successModalClickHandler}
-          message={successMessage}
+          message={defaultSuccessMessage}
           type="success"
         />
       )}
