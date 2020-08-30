@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled/macro";
 import { css } from "@emotion/core";
 import { useForm } from "react-hook-form";
-import StButton from "./StButton";
+import ClickableButton from "./ClickableButton";
 import { colors } from "../util/globalStyles";
 import Loader from "react-loader-spinner";
 
@@ -124,11 +124,11 @@ function Form({ config, method, action, onSuccess, onError }) {
         )
       )}
       {isProcessing ? (
-        <StButton type="button" disabled={true}>
+        <ClickableButton type="button" disabled={true}>
           <Loader type="Oval" color="#ffffff" height={10} width={10} />
-        </StButton>
+        </ClickableButton>
       ) : (
-        <StButton type="submit">Submit</StButton>
+        <ClickableButton type="submit">Submit</ClickableButton>
       )}
     </StForm>
   );

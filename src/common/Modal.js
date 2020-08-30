@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { css } from "@emotion/core";
 import styled from "@emotion/styled/macro";
-import StButton from "./StButton";
+import ClickableButton from "./ClickableButton";
 import { colors } from "../util/globalStyles";
 
 const StBackground = styled.div`
@@ -81,9 +81,9 @@ const Modal = ({ message, buttonText, clickHandler, type }) => {
           </>
         )}
         <StDescription>{message}</StDescription>
-        <StButton type="button" clickHandler={clickHandler}>
+        <ClickableButton type="button" clickHandler={clickHandler}>
           {buttonText}
-        </StButton>
+        </ClickableButton>
       </StMessageBox>
     </StBackground>
   );
